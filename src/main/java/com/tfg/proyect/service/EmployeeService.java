@@ -1,19 +1,23 @@
 package com.tfg.proyect.service;
 
-import java.util.List;
+import com.tfg.proyect.dto.EmployeeDTO;
+import com.tfg.proyect.model.EmployeeEntity;
 
-import com.tfg.proyect.model.Employee;
+import java.util.List;
+import java.util.Optional;
 
 public interface EmployeeService {
 
-    Employee getEmployeeById(String dni);
+  Optional<EmployeeEntity> findByUsername(String username);
 
-    Employee save(Employee employee);
+  EmployeeDTO getEmployeeById(String dni);
 
-    List<Employee> getAllEmployees();
+  EmployeeDTO save(EmployeeDTO employee);
 
-    Employee updateEmployee(Employee employee);
+  List<EmployeeDTO> getAllEmployees();
 
-    void deleteEmployee(String dni);
+  EmployeeDTO updateEmployee(EmployeeDTO employeeDTO, String password);
+
+  void deleteEmployee(String dni);
 
 }

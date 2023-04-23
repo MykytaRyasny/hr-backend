@@ -2,6 +2,7 @@ package com.tfg.proyect;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import com.tfg.proyect.model.EmployeeEntity;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -9,7 +10,6 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.annotation.Rollback;
 
-import com.tfg.proyect.model.Employee;
 import com.tfg.proyect.repository.EmployeeRepository;
 
 @DataJpaTest
@@ -31,9 +31,9 @@ class EmployeeRepositoryTests {
 	@Rollback(true)
 	void testRepositoryLayer() {
 		// Given
-		employeeRepository.save(new Employee("81305842Z", "Mykyta", "Ryasny", "nekit", "123", "admin"));
+		employeeRepository.save(new EmployeeEntity("81305842Z", "Mykyta", "Ryasny", "nekit", "123", "admin"));
 		// When
-		Employee emp = employeeRepository.findById("81305842Z").get();
+		EmployeeEntity emp = employeeRepository.findById("81305842Z").get();
 		// Then
 		assertEquals("81305842Z", emp.getDni());
 	}

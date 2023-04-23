@@ -1,55 +1,59 @@
 package com.tfg.proyect;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.mockito.Mockito.when;
 
+import java.util.Optional;
+
+import com.tfg.proyect.model.EmployeeEntity;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mapstruct.factory.Mappers;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.Replace;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.annotation.Rollback;
+import org.mockito.Spy;
+import org.mockito.junit.jupiter.MockitoExtension;
 
-import com.tfg.proyect.model.Employee;
+import com.tfg.proyect.dto.EmployeeDTO;
+import com.tfg.proyect.mapper.EmployeeMapper;
 import com.tfg.proyect.repository.EmployeeRepository;
 import com.tfg.proyect.service.EmployeeServiceImpl;
 
-@SpringBootTest
+@ExtendWith(MockitoExtension.class)
 public class EmployeeServiceTest {
 
-    @Autowired
+    @Mock
     EmployeeRepository employeeRepository;
+
+    @Spy
+    private EmployeeMapper employeeMapper = Mappers.getMapper(EmployeeMapper.class);
 
     @InjectMocks
     EmployeeServiceImpl employeeServiceImpl;
+
+    private EmployeeEntity employee;
+
+    @BeforeEach
+    public void setup() {
+        employee = new EmployeeEntity("81305842Z", "Mykyta", "Ryasny", "nekit", "123", "admin");
+    }
 
     /*
      * All tests should be
      * Given - When - Then
      */
 
+    @DisplayName("Test for find by ID")
     @Test
-    @Rollback(true)
     public void insertAnEmployeeTest() {
         // Given
-        employeeRepository.save(new Employee("81305842Z", "Mykyta", "Ryasny", "nekit", "123", "admin"));
+        when(employeeRepository.findById("81305842Z")).thenReturn(Optional.of(employee));
         // When
-        Employee emp = employeeRepository.findById("81305842Z").get();
+        EmployeeDTO employeeDTO = employeeServiceImpl.getEmployeeById("81305842Z");
         // Then
-        assertEquals("81305842Z", emp.getDni());
-
-    }
-
-    @Test
-    public void listAllEmployeesTest() {
-        // Given
-        Employee emp1 = new Employee("05309740Y", "Perla Mar", "Barrera", "Perlaba", "123", "user");
-        Employee emp2 = new Employee("91869584V", "Leire", "Diéguez", "Leiredi", "123", "user");
-        Employee emp3 = new Employee("57256365G", "Diéguez", "Diéguez", "Dieguezdi", "123", "user");
-
-        // When
+        assertEquals("81305842Z", employeeDTO.getDni());
 
     }
 }

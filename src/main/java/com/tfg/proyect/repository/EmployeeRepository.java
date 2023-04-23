@@ -1,9 +1,12 @@
 package com.tfg.proyect.repository;
 
+import com.tfg.proyect.model.EmployeeEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.tfg.proyect.model.Employee;
+import java.util.Optional;
 
-public interface EmployeeRepository extends JpaRepository<Employee, String> {
+public interface EmployeeRepository extends JpaRepository<EmployeeEntity, String> {
+
+  Optional<EmployeeEntity> findByUsername(String username);
 
 }
