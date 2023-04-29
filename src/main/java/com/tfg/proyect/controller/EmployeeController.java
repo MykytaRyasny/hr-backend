@@ -31,6 +31,8 @@ public class EmployeeController {
 
   private static final Marker IMPORTANT = MarkerFactory.getMarker("IMPORTANT");
 
+  //CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
+
   @GetMapping(value = "/find/{dni}")
   public ResponseEntity<EmployeeDTO> getEmployeeById(@PathVariable(value = "dni") String dni, final Principal user) {
     EmployeeDTO employeeDTO = employeeService.getEmployeeById(dni);
