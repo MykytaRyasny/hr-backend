@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class TfgApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(TfgApplication.class, args);
-	}
+  public static void main(String[] args) {
+    SpringApplication.run(TfgApplication.class, args);
+  }
 }
