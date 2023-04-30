@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
@@ -19,6 +21,7 @@ import org.springframework.web.bind.annotation.*;
 import java.security.Principal;
 import java.util.List;
 
+@EnableMethodSecurity
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/employee")
@@ -31,7 +34,6 @@ public class EmployeeController {
 
   private static final Marker IMPORTANT = MarkerFactory.getMarker("IMPORTANT");
 
-  //CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
 
   @GetMapping(value = "/find/{dni}")
   public ResponseEntity<EmployeeDTO> getEmployeeById(@PathVariable(value = "dni") String dni, final Principal user) {
@@ -40,7 +42,7 @@ public class EmployeeController {
   }
 
   @GetMapping("/all")
-  //@PreAuthorize("hasRole('ROLE_admin')")
+  @PreAuthorize("hasRole('ROLE_admin')")
   public ResponseEntity<List<EmployeeDTO>> getAll(final Principal user) {
     Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
     String currentAuth = authentication.getAuthorities().toString();
@@ -51,7 +53,7 @@ public class EmployeeController {
   }
 
   @PostMapping("/new")
-  //@PreAuthorize("hasAnyRole('ROLE_admin', 'ROLE_hr')")
+  @PreAuthorize("hasRole('ROLE_admin')")
   public ResponseEntity<EmployeeDTO> newEmployee(@RequestBody EmployeeDTO employeeDTO, final Principal user) {
     Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
     String currentAuth = authentication.getAuthorities().toString();
@@ -70,7 +72,7 @@ public class EmployeeController {
       employee.setLastName(employeeDTO.getLastName());
       employee.setUsername(EmployeeCreatorUtils.generateUsername(employeeDTO.getFirstName(), employeeDTO.getLastName()));
       employeeService.save(employee);
-      LOGGER.info(String.format("Username created succesfully, the password is: %s", employee.getPassword()));
+      LOGGER.info(IMPORTANT, "Username created succesfully, the password is:{}", employee.getPassword());
       LOGGER.info("Role of user {} with rol {}", currentUser, currentAuth);
       return new ResponseEntity<>(HttpStatus.CREATED);
     } catch (DataIntegrityViolationException e) {
