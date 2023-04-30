@@ -33,4 +33,5 @@ build/
 .vscode/
 
 ### Sensitive Files ###
-/src/main/resources
+/src/main/resources/*
+
