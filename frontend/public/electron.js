@@ -12,6 +12,7 @@ function createWindow() {
         // communicate between node-land and browser-land.
         webPreferences: {
             preload: path.join(__dirname, "preload.js"),
+            webSecurity: app.isPackaged
         },
     });
 
@@ -24,7 +25,7 @@ function createWindow() {
             protocol: "file:",
             slashes: true,
         })
-        : "http://localhost:3000";
+        : "http://127.0.0.1:3000";
     mainWindow.loadURL(appURL);
 
     // Automatically open Chrome's DevTools in development mode.
@@ -33,7 +34,7 @@ function createWindow() {
     }
 }
 
-// Setup a local proxy to adjust the paths of requested files when loading
+// Setup a local proxy.js to adjust the paths of requested files when loading
 // them from the local production bundle (e.g.: local fonts, etc...).
 function setupLocalFilesNormalizerProxy() {
     protocol.registerHttpProtocol(

@@ -6,8 +6,6 @@ import com.tfg.proyect.utils.EmployeeCreatorUtils;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.slf4j.Marker;
-import org.slf4j.MarkerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
@@ -32,9 +30,6 @@ public class EmployeeController {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(EmployeeController.class);
 
-  private static final Marker IMPORTANT = MarkerFactory.getMarker("IMPORTANT");
-
-
   @GetMapping(value = "/find/{dni}")
   public ResponseEntity<EmployeeDTO> getEmployeeById(@PathVariable(value = "dni") String dni, final Principal user) {
     EmployeeDTO employeeDTO = employeeService.getEmployeeById(dni);
@@ -48,7 +43,7 @@ public class EmployeeController {
     String currentAuth = authentication.getAuthorities().toString();
     String currentUser = authentication.getName();
     List<EmployeeDTO> employeeDTOList = employeeService.getAllEmployees();
-    LOGGER.info(IMPORTANT, "Role of user {} with rol {}", currentUser, currentAuth);
+    LOGGER.info("Role of user {} with rol {}", currentUser, currentAuth);
     return new ResponseEntity<>(employeeDTOList, HttpStatus.OK);
   }
 
@@ -72,7 +67,7 @@ public class EmployeeController {
       employee.setLastName(employeeDTO.getLastName());
       employee.setUsername(EmployeeCreatorUtils.generateUsername(employeeDTO.getFirstName(), employeeDTO.getLastName()));
       employeeService.save(employee);
-      LOGGER.info(IMPORTANT, "Username created succesfully, the password is:{}", employee.getPassword());
+      LOGGER.info("Username created succesfully, the password is:{}", employee.getPassword());
       LOGGER.info("Role of user {} with rol {}", currentUser, currentAuth);
       return new ResponseEntity<>(HttpStatus.CREATED);
     } catch (DataIntegrityViolationException e) {
