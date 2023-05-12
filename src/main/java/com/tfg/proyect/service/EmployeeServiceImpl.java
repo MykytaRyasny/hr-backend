@@ -65,7 +65,6 @@ public class EmployeeServiceImpl implements EmployeeService, UserDetailsService 
   public EmployeeDTO save(EmployeeDTO employeeDTO) {
     EmployeeEntity employee = employeeMapper.employeeDTOToEmployee(employeeDTO);
     employee.setPassword(passwordEncoder.encode(employeeDTO.getPassword()));
-    employee.setPassword(passwordEncoder.encode(employeeDTO.getPassword()));
     employee.setRole(employee.getRole());
     employeeRepository.save(employee);
     return employeeDTO;
