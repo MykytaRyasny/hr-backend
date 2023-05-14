@@ -5,6 +5,7 @@ import com.tfg.proyect.mapper.EmployeeMapper;
 import com.tfg.proyect.model.EmployeeEntity;
 import com.tfg.proyect.repository.EmployeeRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -21,6 +22,7 @@ import java.util.Optional;
 @Service
 @AllArgsConstructor
 public class EmployeeServiceImpl implements EmployeeService, UserDetailsService {
+
 
   private EmployeeRepository employeeRepository;
 
