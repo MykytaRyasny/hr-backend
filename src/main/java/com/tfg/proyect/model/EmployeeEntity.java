@@ -22,50 +22,50 @@ import java.util.List;
 @Table(name = "employees")
 public class EmployeeEntity implements UserDetails {
 
-  @Id
-  @Column(name = "DNI", nullable = false)
-  private String dni;
+    @Id
+    @Column(name = "DNI", nullable = false)
+    private String dni;
 
-  @Column(name = "FIRST_NAME")
-  private String firstName;
+    @Column(name = "FIRST_NAME")
+    private String firstName;
 
-  @Column(name = "LAST_NAME")
-  private String lastName;
+    @Column(name = "LAST_NAME")
+    private String lastName;
 
-  @Column(name = "USERNAME", unique = true, nullable = false)
-  private String username;
+    @Column(name = "USERNAME", unique = true, nullable = false)
+    private String username;
 
-  @Column(name = "PASSWORD", nullable = false)
-  private String password;
+    @Column(name = "PASSWORD", nullable = false)
+    private String password;
 
-  @Column(name = "ROLE", nullable = false, unique = true)
-  private String role;
+    @Column(name = "ROLE", nullable = false, unique = true)
+    private String role;
 
-  @Override
-  public Collection<? extends GrantedAuthority> getAuthorities() {
-    List<GrantedAuthority> roles = new ArrayList<>();
-    roles.add(new SimpleGrantedAuthority("ROLE_" + role));
-    return roles;
-  }
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        List<GrantedAuthority> roles = new ArrayList<>();
+        roles.add(new SimpleGrantedAuthority("ROLE_" + role));
+        return roles;
+    }
 
-  @Override
-  public boolean isAccountNonExpired() {
-    return true;
-  }
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
 
-  @Override
-  public boolean isAccountNonLocked() {
-    return true;
-  }
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
 
-  @Override
-  public boolean isCredentialsNonExpired() {
-    return true;
-  }
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
 
-  @Override
-  public boolean isEnabled() {
-    return true;
-  }
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
 
 }

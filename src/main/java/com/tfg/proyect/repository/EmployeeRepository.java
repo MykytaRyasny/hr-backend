@@ -7,8 +7,6 @@ import java.util.Optional;
 
 public interface EmployeeRepository extends JpaRepository<EmployeeEntity, String> {
 
-  Optional<EmployeeEntity> findByUsername(String username);
-
-  // @Query(value = )
+    Optional<EmployeeEntity> findByUsername(String username);
 
 }
