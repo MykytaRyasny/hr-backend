@@ -1,73 +1,69 @@
 package com.tfg.proyect.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.io.Serializable;
 
 public class EmployeeDTO implements Serializable {
 
-  private String dni;
+    private String dni;
 
-  private String firstName;
+    private String firstName;
 
-  private String lastName;
-  
-  private String username;
+    private String lastName;
 
-  private String password;
+    private String username;
 
-  private String role;
+    private String password;
 
-  public String getDni() {
-    return dni;
-  }
+    private String role;
 
-  public void setDni(String dni) {
-    this.dni = dni;
-  }
+    public String getDni() {
+        return dni;
+    }
 
-  public String getFirstName() {
-    return firstName;
-  }
+    public void setDni(String dni) {
+        this.dni = dni;
+    }
 
-  public void setFirstName(String firstName) {
-    this.firstName = firstName;
-  }
+    public String getFirstName() {
+        return firstName;
+    }
 
-  public String getLastName() {
-    return lastName;
-  }
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
 
-  public void setLastName(String lastName) {
-    this.lastName = lastName;
-  }
+    public String getLastName() {
+        return lastName;
+    }
 
-  public String getUsername() {
-    return username;
-  }
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
 
-  public void setUsername(String username) {
-    this.username = username;
-  }
+    public String getUsername() {
+        return username;
+    }
 
-  @JsonIgnore
-  public String getPassword() {
-    return password;
-  }
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
-  @JsonProperty
-  public void setPassword(String password) {
-    this.password = password;
-  }
+    @JsonIgnore
+    public String getPassword() {
+        return password;
+    }
 
-  @JsonIgnore
-  public String getRole() {
-    return role;
-  }
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
-  @JsonProperty
-  public void setRole(String role) {
-    this.role = role;
-  }
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
 }
