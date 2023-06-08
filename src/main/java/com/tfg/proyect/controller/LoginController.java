@@ -5,7 +5,6 @@ import com.tfg.proyect.dto.UserInfoResponse;
 import com.tfg.proyect.model.EmployeeEntity;
 import com.tfg.proyect.security.JwtUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -44,7 +43,7 @@ public class LoginController {
 
         ResponseCookie jwtCookie = jwtUtils.generateJwtCookie(userDetails);
 
-        return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE, jwtCookie.toString())
+        return ResponseEntity.ok().header("x-auth-token", jwtCookie.toString())
                 .body(new UserInfoResponse(
                         userDetails.getFirstName(),
                         userDetails.getLastName(),
@@ -57,7 +56,7 @@ public class LoginController {
         ResponseCookie cookie = jwtUtils.getCleanJwtCookie();
         return ResponseEntity
                 .ok()
-                .header(HttpHeaders.SET_COOKIE, cookie.toString())
+                .header("x-auth-token", cookie.toString())
                 .body(null);
     }
 }

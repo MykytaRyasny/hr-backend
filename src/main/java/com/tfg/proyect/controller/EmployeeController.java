@@ -38,7 +38,7 @@ public class EmployeeController {
     }
 
     @GetMapping("/all")
-    @PreAuthorize("hasAnyRole('ROLE_admin', 'ROLE_hr')")
+    @PreAuthorize("hasAnyRole('ROLE_admin', 'ROLE_hr', 'ROLE_shop_vendor', 'ROLE_shop_manager')")
     public ResponseEntity<List<EmployeeDTO>> getAll(final Principal user) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String currentAuth = authentication.getAuthorities().toString();
