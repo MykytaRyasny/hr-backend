@@ -18,6 +18,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import static com.tfg.proyect.controller.utils.LoggerUtils.LoggerInfo;
+
+/**
+ * The type Login controller.
+ */
 @RestController
 @RequestMapping("/auth")
 public class LoginController {
@@ -25,12 +30,21 @@ public class LoginController {
     @Autowired
     private AuthenticationManager authenticationManager;
 
+    /**
+     * The Jwt utils.
+     */
     @Autowired
     JwtUtils jwtUtils;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    /**
+     * Authenticate user response entity.
+     *
+     * @param loginRequest the login request
+     * @return the userDetail which I use to filter in FrontEnd
+     */
     @PostMapping("/login")
     public ResponseEntity<?> authenticateUser(@Validated @RequestBody LoginDTO loginRequest) {
 
@@ -43,6 +57,11 @@ public class LoginController {
 
         ResponseCookie jwtCookie = jwtUtils.generateJwtCookie(userDetails);
 
+        String methodName = new Object() {
+        }.getClass().getEnclosingMethod().getName();
+        String className = new Object() {
+        }.getClass().getEnclosingClass().getName();
+        LoggerInfo(methodName, className);
         return ResponseEntity.ok().header("x-auth-token", jwtCookie.toString())
                 .body(new UserInfoResponse(
                         userDetails.getFirstName(),
@@ -51,9 +70,19 @@ public class LoginController {
                         userDetails.getRole()));
     }
 
+    /**
+     * Logout user response entity.
+     *
+     * @return idealy delete the cookie
+     */
     @PostMapping("/signout")
     public ResponseEntity<?> logoutUser() {
         ResponseCookie cookie = jwtUtils.getCleanJwtCookie();
+        String methodName = new Object() {
+        }.getClass().getEnclosingMethod().getName();
+        String className = new Object() {
+        }.getClass().getEnclosingClass().getName();
+        LoggerInfo(methodName, className);
         return ResponseEntity
                 .ok()
                 .header("x-auth-token", cookie.toString())

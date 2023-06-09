@@ -16,26 +16,45 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+/**
+ * The type Security configuration.
+ */
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
 @Order(Ordered.HIGHEST_PRECEDENCE)
 public class SecurityConfiguration {
 
+    /**
+     * The Password enconder config.
+     */
     @Autowired
     PasswordEnconderConfig passwordEnconderConfig;
 
     @Autowired
     private AuthEntryPointJwt unauthorizedHandler;
 
+    /**
+     * The User details service.
+     */
     @Autowired
     UserDetailsService userDetailsService;
 
+    /**
+     * Authentication jwt token filter auth token filter.
+     *
+     * @return the auth token filter
+     */
     @Bean
     public AuthTokenFilter authenticationJwtTokenFilter() {
         return new AuthTokenFilter();
     }
 
+    /**
+     * Authentication provider dao authentication provider.
+     *
+     * @return the dao authentication provider
+     */
     @Bean
     public DaoAuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
@@ -46,11 +65,25 @@ public class SecurityConfiguration {
         return authProvider;
     }
 
+    /**
+     * Authentication manager authentication manager.
+     *
+     * @param authConfig the auth config
+     * @return the authentication manager
+     * @throws Exception the exception
+     */
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authConfig) throws Exception {
         return authConfig.getAuthenticationManager();
     }
 
+    /**
+     * Filter chain security filter chain.
+     *
+     * @param http the http
+     * @return the security filter chain
+     * @throws Exception the exception
+     */
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.cors().and().csrf().disable()

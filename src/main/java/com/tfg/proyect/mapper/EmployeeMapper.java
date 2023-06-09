@@ -6,13 +6,34 @@ import org.mapstruct.Mapper;
 
 import java.util.List;
 
+/**
+ * The interface Employee mapper.
+ */
 @Mapper(componentModel = "spring")
 public interface EmployeeMapper {
 
-  EmployeeDTO employeeToEmployeeDTO(EmployeeEntity employee);
+    /**
+     * Pass EmployeeEntity to EmployeeDTO
+     *
+     * @param employee the employee
+     * @return the employee dto
+     */
+    EmployeeDTO employeeToEmployeeDTO(EmployeeEntity employee);
 
-  EmployeeEntity employeeDTOToEmployee(EmployeeDTO employeeDTO);
+    /**
+     * Pass EmployeeDTO to EmployeeEntity
+     *
+     * @param employeeDTO the employee dto
+     * @return the employee entity
+     */
+    EmployeeEntity employeeDTOToEmployee(EmployeeDTO employeeDTO);
 
-  List<EmployeeDTO> employeeToEmployeeDTOList(List<EmployeeEntity> employees);
+    /**
+     * Pass EmployeeEntity list to EmployeeDTO list
+     *
+     * @param employees the employees
+     * @return the list
+     */
+    List<EmployeeDTO> employeeToEmployeeDTOList(List<EmployeeEntity> employees);
 
 }
