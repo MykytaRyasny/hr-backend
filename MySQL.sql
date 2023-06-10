@@ -14,10 +14,10 @@ CREATE TABLE EMPLOYEES (
 );
 -- Insert Employees
 -- La contraseña es "admin" pero encriptada para poder hacer login en la base de datos.
-insert into employees value ("admin", "admin", "admin", "admin@admin.com", "$2y$10$UV/a8YMeYzix/wSZFLRLsudUe4.qcPG1pFyaAzjSLy2RZZ4YIEoKG", "admin");
-insert into employees value ("shop", "shop", "shop", "shop@shop.com", "$2y$10$UV/a8YMeYzix/wSZFLRLsudUe4.qcPG1pFyaAzjSLy2RZZ4YIEoKG", "shop_vendor");
-insert into employees value ("shopm", "shopm", "shopm", "shopm@shopm.com", "$2y$10$UV/a8YMeYzix/wSZFLRLsudUe4.qcPG1pFyaAzjSLy2RZZ4YIEoKG", "shop_manager");
-insert into employees value ("hr", "hr", "hr", "hr@hr.com", "$2y$10$UV/a8YMeYzix/wSZFLRLsudUe4.qcPG1pFyaAzjSLy2RZZ4YIEoKG", "hr");
+insert into EMPLOYEES value ("admin", "admin", "admin", "admin@admin.com", "$2y$10$UV/a8YMeYzix/wSZFLRLsudUe4.qcPG1pFyaAzjSLy2RZZ4YIEoKG", "admin");
+insert into EMPLOYEES value ("shop", "shop", "shop", "shop@shop.com", "$2y$10$UV/a8YMeYzix/wSZFLRLsudUe4.qcPG1pFyaAzjSLy2RZZ4YIEoKG", "shop_vendor");
+insert into EMPLOYEES value ("shopm", "shopm", "shopm", "shopm@shopm.com", "$2y$10$UV/a8YMeYzix/wSZFLRLsudUe4.qcPG1pFyaAzjSLy2RZZ4YIEoKG", "shop_manager");
+insert into EMPLOYEES value ("hr", "hr", "hr", "hr@hr.com", "$2y$10$UV/a8YMeYzix/wSZFLRLsudUe4.qcPG1pFyaAzjSLy2RZZ4YIEoKG", "hr");
 
 -- ------------------ LIBRARY DB ------------------
 
