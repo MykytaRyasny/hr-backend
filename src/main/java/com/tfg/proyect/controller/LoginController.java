@@ -11,7 +11,6 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -35,9 +34,6 @@ public class LoginController {
      */
     @Autowired
     JwtUtils jwtUtils;
-
-    @Autowired
-    private PasswordEncoder passwordEncoder;
 
     /**
      * Authenticate user response entity.
@@ -88,4 +84,6 @@ public class LoginController {
                 .header("x-auth-token", cookie.toString())
                 .body(null);
     }
+
+
 }

@@ -1,6 +1,5 @@
 package com.tfg.proyect.controller;
 
-import ch.qos.logback.core.encoder.EchoEncoder;
 import com.tfg.proyect.controller.utils.LoggerUtils;
 import com.tfg.proyect.dto.EmployeeDTO;
 import com.tfg.proyect.service.EmployeeService;
