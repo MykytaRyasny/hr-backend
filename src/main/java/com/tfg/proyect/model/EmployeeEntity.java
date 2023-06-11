@@ -19,7 +19,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "employees")
+@Table(name = "EMPLOYEES")
 public class EmployeeEntity implements UserDetails {
 
     @Id
